@@ -1,0 +1,218 @@
+Entities:
+
+package pe.edu.upc.entities;
+
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+@Entity
+@Table(name = "Usuario")
+
+public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idUsuario;
+
+    @Column(name = "nombre", length = 50, nullable = false)
+    private String nombre;
+
+    @Column(name = "correo", length = 50, nullable = false)
+    private String correo;
+
+    @Column(name = "password", length = 50, nullable = false)
+    private String password;
+
+    @Column(name = "estado", nullable = false)
+    private Boolean estado;
+    public Usuario() {}
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Usuario(int idUsuario, String nombre, String correo, String password, Boolean estado) {}
+}
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Repositories:
+
+package pe.edu.upc.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import pe.edu.upc.entities.Usuario;
+@Repository
+
+public interface IUsuarioRepository extends JpaRepository<Usuario,Integer> {
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ServiceInterface:
+
+package pe.edu.upc.serviceinterfaces;
+
+import pe.edu.upc.entities.Usuario;
+
+import java.util.List;
+
+public interface IUsuarioService {
+    public List<Usuario> list();
+    public void insert(Usuario usuario);
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ServiceImplement:
+
+package pe.edu.upc.serviceimplements;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pe.edu.upc.entities.Usuario;
+import pe.edu.upc.repositories.IUsuarioRepository;
+import pe.edu.upc.serviceinterfaces.IUsuarioService;
+
+import java.util.List;
+@Service
+public class UsuarioServiceImplement implements IUsuarioService {
+    @Autowired
+    private IUsuarioRepository uS;
+
+    @Override
+    public List<Usuario> list() {return uS.findAll(); }
+
+    @Override
+    public void insert(Usuario usuario) {uS.save(usuario);}
+}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DTOS:
+
+package pe.edu.upc.dtos;
+
+public class UsuarioDTO {
+    private int idUsuario;
+    private String nombre;
+    private String correo;
+    private String password;
+    private Boolean estado;
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
+    }
+}
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Controllers:
+
+package pe.edu.upc.controllers;
+
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.dtos.UsuarioDTO;
+import pe.edu.upc.entities.Usuario;
+import pe.edu.upc.serviceinterfaces.IUsuarioService;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/usuarios")
+public class UsuarioController {
+    @Autowired
+    private IUsuarioService uS;
+    @GetMapping
+    public List<UsuarioDTO> listar(){
+        return uS.list().stream().map(y->{
+            ModelMapper m = new ModelMapper();
+            return m.map(y, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
+    @PostMapping
+    public void insertar(@RequestBody UsuarioDTO dto){
+        ModelMapper m = new ModelMapper();
+        Usuario u = m.map(dto, Usuario.class);
+        uS.insert(u);
+    }
+}
+
