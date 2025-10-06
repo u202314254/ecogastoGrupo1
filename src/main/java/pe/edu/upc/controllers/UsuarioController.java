@@ -20,7 +20,7 @@ public class UsuarioController {
     private IUsuarioService uS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('CLIENT')")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'CLIENT')")
     public List<UsuarioDTOList> listar(){
         return uS.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
