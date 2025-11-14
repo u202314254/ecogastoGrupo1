@@ -1,0 +1,33 @@
+<div class="container">
+  <div style="text-align:center; margin:5%">
+    <h2>Registro de Recurso</h2>
+  </div>
+
+  <div style="text-align:center; margin:5%">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+      @if (edicion) {
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+      </mat-form-field>
+      }
+      <br />
+      <mat-form-field>
+        <mat-label>Tipo de recurso</mat-label>
+        <mat-select formControlName="nombre">
+          @for (r of tiporecurso; track r) {
+          <mat-option [value]="r.value">{{ r.viewValue }}</mat-option>
+          }
+        </mat-select>
+        <mat-error> @if (form.get('nombre')?.hasError('required')) { Ingrese recurso!! } </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div>
+        <button matButton="elevated">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
