@@ -1,72 +1,70 @@
 <div class="container">
-    <div style="text-align: center; margin: 5%">
-        <h2>Registro de Usuario</h2>
-    </div>
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Edición de Usuario' : 'Registrar usuario' }}</h2>
+  </div>
 
-    <div style="text-align: center; margin: 5%">
-        <form [formGroup]="form" (ngSubmit)="aceptar()">
-        @if (edicion) {
-        <mat-form-field>
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+      @if (edicion) {
+      <mat-form-field>
         <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
-        </mat-form-field>
-        }
+        <input matInput formControlName="codigo" readonly="true" />
+        <mat-error> @if (form.get('codigo')?.hasError('required')) { Ingrese ID!! } </mat-error>
+      </mat-form-field>
+      }
 
-        <br />
-
-        <mat-form-field>
+      <br />
+      <mat-form-field>
         <mat-label>Hogar</mat-label>
-        <mat-select formControlName="idHogar">
-        @for (h of hogar; track h.tipohogar) {
-        <mat-option [value]="h.tipohogar">{{ h.tipohogar }}</mat-option>
-        }
+        <mat-select formControlName="IdHogar">
+          @for (hogar of listaHogares; track hogar) {
+          <mat-option [value]="hogar.idHogar">{{ hogar.tipohogar }}</mat-option>
+          }
         </mat-select>
-        <mat-error>
-        @if (form.get('idHogar')?.hasError('required')) { Ingrese su hogar! }
-        </mat-error>
-        </mat-form-field>
-        <br />
+      </mat-form-field>
+      
+      <br />
 
-        <mat-form-field>
+      <mat-form-field>
         <mat-label>Username</mat-label>
         <input matInput formControlName="nombre" />
         <mat-error>
-        @if (form.get('nombre')?.hasError('required')) { Ingrese su username! }
+          @if (form.get('nombre')?.hasError('required')) { Ingrese su username! }
         </mat-error>
-        </mat-form-field>
-        <br />
+      </mat-form-field>
+      <br />
 
-        <mat-form-field>
+      <mat-form-field>
         <mat-label>Correo</mat-label>
         <input matInput formControlName="correoele" />
         <mat-error>
-        @if (form.get('correoele')?.hasError('required')) { Ingrese su correo! }
+          @if (form.get('correoele')?.hasError('required')) { Ingrese su correo! }
         </mat-error>
-        </mat-form-field>
-        <br />
+      </mat-form-field>
+      <br />
 
-        <mat-form-field>
+      <mat-form-field>
         <mat-label>Password</mat-label>
         <input matInput formControlName="contra" />
         <mat-error>
-        @if (form.get('contra')?.hasError('required')) { Ingrese su contraseña! }
+          @if (form.get('contra')?.hasError('required')) { Ingrese su contraseña! }
         </mat-error>
-        </mat-form-field>
-        <br />
+      </mat-form-field>
+      <br />
 
-        <mat-label>Estado</mat-label>
-        <mat-radio-group aria-label="Select an option" formControlName="estad">
+      <mat-label>Estado</mat-label>
+      <mat-radio-group aria-label="Select an option" formControlName="estad">
         <mat-radio-button [value]="true">Activo</mat-radio-button>
         <mat-radio-button [value]="false">No activo</mat-radio-button>
         <mat-error>
-        @if (form.get('estad')?.hasError('required')) { Ingrese su estado! }
+          @if (form.get('estad')?.hasError('required')) { Ingrese su estado! }
         </mat-error>
-        </mat-radio-group>
-        <br />
+      </mat-radio-group>
+      <br />
 
-        <div>
-        <button matButton="elevated">Guardar</button>
-        </div>
+      <div>
+        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      </div>
     </form>
-    </div>
+  </div>
 </div>
