@@ -1,0 +1,133 @@
+<div class="container">
+  <div style="text-align:center; margin:5%">
+    <h2>{{ edicion ? 'Editar Meta' : 'Registro de Meta' }}</h2>
+  </div>
+
+  <div style="text-align:center; margin:5%">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+      <!-- USUARIO -->
+      <mat-form-field appearance="fill">
+        <mat-label>Usuario</mat-label>
+        <mat-select formControlName="usuario">
+          <mat-option *ngFor="let u of usuarios" [value]="u">
+            {{ u.username }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('usuario')?.hasError('required')">
+          Ingrese el usuario!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- RECURSO -->
+      <mat-form-field appearance="fill">
+        <mat-label>Recurso</mat-label>
+        <mat-select formControlName="recurso">
+          <mat-option *ngFor="let r of recursos" [value]="r">
+            {{ r.nombreRecurso }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('recurso')?.hasError('required')">
+          Ingrese el recurso!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- NOMBRE META -->
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre de la meta</mat-label>
+        <input matInput formControlName="nombre" />
+        <mat-error *ngIf="form.get('nombre')?.hasError('required')">
+          Ingrese el nombre de la meta!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- ESTADO -->
+      <mat-label>Estado</mat-label>
+      <br />
+      <mat-radio-group formControlName="estado">
+        <mat-radio-button [value]="true">Activo</mat-radio-button>
+        <mat-radio-button [value]="false">No activo</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="form.get('estado')?.hasError('required')">
+        Ingrese el estado!
+      </mat-error>
+      <br /><br />
+
+      <!-- FECHA INICIO -->
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker1"
+          formControlName="fechainicio"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="form.get('fechainicio')?.hasError('required')">
+          Ingrese la fecha de inicio!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- FECHA FIN -->
+      <mat-form-field appearance="fill">
+        <mat-label>Fecha Fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          formControlName="fechafin"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="form.get('fechafin')?.hasError('required')">
+          Ingrese la fecha de fin!
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <!-- PROGRESO -->
+      <mat-form-field appearance="fill">
+        <mat-label>Progreso (%)</mat-label>
+        <input matInput type="number" formControlName="progreso" />
+        <mat-error *ngIf="form.get('progreso')?.hasError('required')">
+          Ingrese el progreso!
+        </mat-error>
+        <mat-error *ngIf="form.get('progreso')?.hasError('min')">
+          El progreso mínimo es 0%
+        </mat-error>
+        <mat-error *ngIf="form.get('progreso')?.hasError('max')">
+          El progreso máximo es 100%
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div style="margin-top:20px;">
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="form.invalid"
+        >
+          {{ edicion ? 'Actualizar' : 'Guardar' }}
+        </button>
+
+        <button
+          mat-stroked-button
+          color="warn"
+          type="button"
+          style="margin-left:8px"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+      </div>
+
+      <!-- Para debug si quieres ver el objeto:
+      <pre>{{ form.value | json }}</pre>
+      -->
+    </form>
+  </div>
+</div>
