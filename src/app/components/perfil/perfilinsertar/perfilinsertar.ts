@@ -8,12 +8,10 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { Perfil } from '../../../models/Perfil';
 import { Perfilservice } from '../../../services/perfilservice';
 import { Usuarioservice } from '../../../services/usuarioservice';
-import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
@@ -24,14 +22,12 @@ import { Usuario } from '../../../models/Usuario';
   imports: [
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
     MatDatepickerModule,
     MatButtonModule,
     MatRadioModule,
     MatSelectModule 
   ],
   templateUrl: './perfilinsertar.html',
-  providers: [provideNativeDateAdapter()],
   styleUrl: './perfilinsertar.css',
 })
 export class Perfilinsertar implements OnInit {
@@ -66,7 +62,7 @@ export class Perfilinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      idUsuario: ['', Validators.required],
+      FKUsuario: ['', Validators.required],
       name: ['', Validators.required],
       Edad: ['', Validators.required],
       Genero: ['', Validators.required],
@@ -78,7 +74,7 @@ export class Perfilinsertar implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       this.perfil.idPerfil = this.form.value.codigo;
-      this.perfil.usuario.idUsuario = this.form.value.idUsuario;
+      this.perfil.usuario.idUsuario = this.form.value.FKUsuario;
       this.perfil.nombre = this.form.value.name;
       this.perfil.edad = this.form.value.Edad;
       this.perfil.genero = this.form.value.Genero;
@@ -91,7 +87,7 @@ export class Perfilinsertar implements OnInit {
           });
         });
       } else {
-        this.pS.insert(this.perfil).subscribe(() => {
+        this.pS.insert(this.perfil).subscribe((data) => {
           this.pS.list().subscribe((data) => {
             this.pS.setList(data);
           });
@@ -107,7 +103,7 @@ export class Perfilinsertar implements OnInit {
       this.pS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idPerfil),
-          idUsuario: new FormControl(data.usuario.idUsuario),
+          FKUsuario: new FormControl(data.usuario.idUsuario),
           name: new FormControl(data.nombre),
           Edad: new FormControl(data.edad),
           Genero: new FormControl(data.genero),
