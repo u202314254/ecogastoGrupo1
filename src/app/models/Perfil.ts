@@ -1,19 +1,10 @@
-import { Usuario } from "./Usuario";
+import { Hogar } from './Hogar';
 
-export class Perfil{
-    idPerfil:number=0
-    usuario: Usuario = {id:0,
-    hogar: {idHogar:0,
-        distrito:"",
-        ubicacion:"",
-        tipohogar:"",
-        numpersonas:0},
-        username:"",
-        correo:"",
-        password:"",
-        estado:false,}
-    nombre:string=""
-    edad:number=0
-    genero:string=""
-    telefono:string=""
+export class Usuario{
+    idUsuario:number=0
+    hogar:Hogar=new Hogar()
+    username:string=""
+    correo:string=""
+    password:string=""
+    estado:boolean=false
 }
