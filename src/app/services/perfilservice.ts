@@ -33,7 +33,7 @@ export class Perfilservice {
       }
     
       update(p: Perfil) {
-        return this.http.put(this.url, p, { responseType: 'text' });
+        return this.http.put(`${this.url}`, p, { responseType: 'text' });
       }
     
       delete(id: number) {
