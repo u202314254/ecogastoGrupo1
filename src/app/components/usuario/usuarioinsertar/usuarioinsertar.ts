@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {
-    FormBuilder,
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
-    Validators,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
@@ -14,14 +14,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { Usuario } from '../../../models/Usuario'; 
+import { Usuario } from '../../../models/Usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Hogar } from '../../../models/Hogar';
 import { Hogarservice } from '../../../services/hogarservice';
 
 @Component({
-    selector: 'app-usuarioinsertar',
-    imports: [
+  selector: 'app-usuarioinsertar',
+  imports: [
     ReactiveFormsModule,
     MatInputModule,
     MatFormFieldModule,
@@ -29,89 +29,85 @@ import { Hogarservice } from '../../../services/hogarservice';
     MatButtonModule,
     MatRadioModule,
     MatSelectModule,
-    ],
-    templateUrl: './usuarioinsertar.html',
-    providers: [provideNativeDateAdapter()],
-    styleUrl: './usuarioinsertar.css',
+  ],
+  templateUrl: './usuarioinsertar.html',
+  providers: [provideNativeDateAdapter()],
+  styleUrl: './usuarioinsertar.css',
 })
 export class Usuarioinsertar implements OnInit {
-    form: FormGroup = new FormGroup({});
-    usuario: Usuario = new Usuario();
-    edicion: boolean = false;
-    id: number = 0;
-    hogarForm!: FormGroup;
-    hogar: Hogar[] = [];
+  form: FormGroup = new FormGroup({});
+  usuario: Usuario = new Usuario();
+  edicion: boolean = false;
+  id: number = 0;
+  listaHogares: Hogar[] = [];
 
-    constructor(
+  constructor(
     private uS: Usuarioservice,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private hogarService: Hogarservice
-) {}
+    private hS: Hogarservice
+  ) {}
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.route.params.subscribe((data: Params) => {
-        this.id = data['id'];
-        this.edicion = data['id'] != null;
-        this.init();
-        this.hogarForm = this.fb.group({
-        idHogar: [''],
-        });
+      this.id = data['id'];
+      this.edicion = data['id'] != null;
+      this.init();
+    });
+    this.hS.list().subscribe((data) => {
+      this.listaHogares = data;
     });
 
     this.form = this.formBuilder.group({
-        codigo: [''],
-        idHogar: ['', Validators.required],
-        nombre: ['', Validators.required],
-        correoele: ['', Validators.required],
-        contra: ['', Validators.required],
-        estad: [false, Validators.required],
+      codigo: [''],
+      IdHogar: ['', Validators.required],
+      nombre: ['', Validators.required],
+      correoele: ['', Validators.required],
+      contra: ['', Validators.required],
+      estad: [false, Validators.required],
     });
+  }
 
-    this.hogarService.getHogares().subscribe({
-        next: (data) => (this.hogar = data),
-        error: (err) => console.error('Error al cargar usuarios', err),
-    });
-    }
-
-    aceptar(): void {
+  aceptar(): void {
     if (this.form.valid) {
-        this.usuario.id = this.form.value.codigo;
-        this.usuario.hogar = new Hogar();
-        this.usuario.hogar.idHogar = this.form.value.idHogar;
-        this.usuario.username = this.form.value.nombre;
-        this.usuario.correo = this.form.value.correoele;
-        this.usuario.password = this.form.value.contra;
-        this.usuario.estado = this.form.value.estad;
+      this.usuario.idUsuario = this.form.value.codigo;
+      this.usuario.hogar.idHogar = this.form.value.IdHogar;
+      this.usuario.username = this.form.value.nombre;
+      this.usuario.correo = this.form.value.correoele;
+      this.usuario.password = this.form.value.contra;
+      this.usuario.estado = this.form.value.estad;
 
-        if (this.edicion) {
+      if (this.edicion) {
         this.uS.update(this.usuario).subscribe(() => {
-            this.uS.list().subscribe((data) => this.uS.setList(data));
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+          });
         });
-        } else {
-        this.uS.insert(this.usuario).subscribe(() => {
-            this.uS.list().subscribe((data) => this.uS.setList(data));
+      } else {
+        this.uS.insert(this.usuario).subscribe((data) => {
+          this.uS.list().subscribe((data) => {
+            this.uS.setList(data);
+          });
         });
-        }
+      }
 
-        this.router.navigate(['usuarios']);
-        }
+      this.router.navigate(['usuarios']);
     }
+  }
 
-    init() {
+  init() {
     if (this.edicion) {
-        this.uS.listId(this.id).subscribe((data) => {
+      this.uS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
-            codigo: new FormControl(data.id),
-            idHogar: new FormControl(data.hogar.idHogar),
-            nombre: new FormControl(data.username),
-            correoele: new FormControl(data.correo),
-            contra: new FormControl(data.password),
-            estad: new FormControl(data.estado),
+          codigo: new FormControl(data.idUsuario),
+          IdHogar: new FormControl(data.hogar.idHogar),
+          nombre: new FormControl(data.username),
+          correoele: new FormControl(data.correo),
+          contra: new FormControl(data.password),
+          estad: new FormControl(data.estado),
         });
-    });
+      });
     }
-}
+  }
 }
