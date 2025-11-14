@@ -1,0 +1,134 @@
+/* Contenedor general */
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  background-color: #f7faf7;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Fondo curvo superior */
+.login-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 45%; /* 🔼 más grande */
+  background-color: #9ed9a6;
+  border-bottom-left-radius: 50% 30%;
+  border-bottom-right-radius: 50% 30%;
+  z-index: 0;
+}
+
+/* Sección del encabezado */
+.login-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 80px ; /* 🔼 sube el logo */
+}
+
+.login-header .logo {
+  width: 120px; /* 🔼 logo más grande */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.login-header h2 {
+  margin-top: 30px;
+  font-size: 26px; /* 🔼 más grande */
+  font-weight: 800; /* 🔼 más grosor */
+  color: #222;
+  letter-spacing: 0.5px;
+}
+
+.login-header h2 span {
+  color: #2e7d32;
+  font-weight: 900;
+}
+
+/* Contenedor del formulario */
+.login-container {
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin-top: 40px;
+}
+
+/* Inputs */
+.login-container input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border: 2px solid #9ed9a6;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.login-container input:focus {
+  border-color: #4caf50;
+}
+
+/* Checkbox y enlace */
+.remember {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.remember a {
+  color: #2e7d32;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.remember a:hover {
+  text-decoration: underline;
+}
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Texto inferior */
+p {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 14px;
+}
+
+p a {
+  color: #2e7d32;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
