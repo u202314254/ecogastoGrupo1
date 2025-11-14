@@ -1,0 +1,75 @@
+<div class="container">
+  <div style="text-align:center; margin:5%">
+    <h2>Registro de Recomendación</h2>
+  </div>
+
+  <div style="text-align:center; margin:5%">
+    <form [formGroup]="form" (ngSubmit)="aceptar()">
+
+      @if (edicion) {
+      <mat-form-field>
+        <mat-label>ID</mat-label>
+        <input matInput formControlName="codigo" />
+      </mat-form-field>  
+      }
+
+      <br />
+
+      <mat-form-field>
+        <mat-label>Meta</mat-label>
+      <mat-select formControlName="idMeta">
+          @for (m of metas; track m) {
+          <mat-option [value]="m.idMeta">{{ m.idMeta }}</mat-option>
+          }
+        </mat-select>
+        <mat-error>
+          @if (form.get('idMeta')?.hasError('required')) { Ingrese el idMeta! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="descripcion" />
+        <mat-error>
+          @if (form.get('descripcion')?.hasError('required')) { Ingrese la descripción! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Categoría</mat-label>
+        <input matInput formControlName="categoria" />
+        <mat-error>
+          @if (form.get('categoria')?.hasError('required')) { Ingrese la categoría! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fecha de Publicación</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechapublicacion" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error>
+          @if (form.get('fechapublicacion')?.hasError('required')) { Ingrese la fecha! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Fuente</mat-label>
+        <input matInput formControlName="fuente" />
+        <mat-error>
+          @if (form.get('fuente')?.hasError('required')) { Ingrese la fuente! }
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <div style="margin-top:20px;">
+        <button mat-raised-button color="primary" type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+   
