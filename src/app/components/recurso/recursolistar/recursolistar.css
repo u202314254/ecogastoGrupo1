@@ -110,3 +110,10 @@ button[matButton]:not([routerLink]):hover {
   box-shadow: 0 4px 8px rgba(229, 57, 53, 0.3);
 }
 
+.center-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 12px 0; /* opcional: más espacio vertical */
+}
+
