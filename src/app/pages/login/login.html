@@ -1,0 +1,56 @@
+<div class="register-wrapper">
+  <div class="register-content">
+
+    <!-- LOGO + TÍTULO -->
+    <div class="header">
+      <img src="leaf blanco.png" alt="Logo Ecogasto" class="logo" />
+      <h1 class="title">EcoGasto</h1>
+      <p class="subtitle">Crea tu cuenta</p>
+      <p class="description">Sigue los pasos para unirte.</p>
+    </div>
+
+    <!-- PASOS -->
+    <div class="steps">
+      <div class="step active">
+        <div class="number">1</div>
+        <p>Cuenta</p>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <div class="number">2</div>
+        <p>Perfil</p>
+      </div>
+
+      <div class="line"></div>
+
+      <div class="step">
+        <div class="number">3</div>
+        <p>Hogar</p>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <form>
+
+      <label>Correo electrónico</label>
+      <input type="email" placeholder="tu@gmail.com" required />
+
+      <label>Contraseña</label>
+      <input type="password" placeholder="Contraseña" required />
+
+      <!-- BOTONES -->
+      <div class="buttons">
+        <button type="button" class="back-btn">Atrás</button>
+        <button type="button" class="next-btn" routerLink="/menu">Siguiente</button>
+      </div>
+
+      <!-- LOGIN -->
+      <p class="login-text">
+        ¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a>
+      </p>
+    </form>
+
+  </div>
+</div>
