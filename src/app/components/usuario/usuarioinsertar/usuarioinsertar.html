@@ -9,18 +9,21 @@
       <mat-form-field>
         <mat-label>ID</mat-label>
         <input matInput formControlName="codigo" readonly="true" />
-        <mat-error> @if (form.get('codigo')?.hasError('required')) { Ingrese ID!! } </mat-error>
+        <mat-error> @if (form.get('id')?.hasError('required')) { Ingrese ID!! } </mat-error>
       </mat-form-field>
       }
 
       <br />
       <mat-form-field>
         <mat-label>Hogar</mat-label>
-        <mat-select formControlName="IdHogar">
+        <mat-select formControlName="FKHogar">
           @for (hogar of listaHogares; track hogar) {
           <mat-option [value]="hogar.idHogar">{{ hogar.tipohogar }}</mat-option>
           }
         </mat-select>
+        <mat-error>
+          @if (form.get('FKHogar')?.hasError('required')) { Ingrese su hogar! }
+        </mat-error>
       </mat-form-field>
       
       <br />
@@ -36,16 +39,19 @@
 
       <mat-form-field>
         <mat-label>Correo</mat-label>
-        <input matInput formControlName="correoele" />
+        <input matInput formControlName="correoele" type="email" />
         <mat-error>
-          @if (form.get('correoele')?.hasError('required')) { Ingrese su correo! }
+          @if (form.get('correoele')?.hasError('required')) { ¡Ingrese su correo! } 
+          @if (form.get('correoele')?.hasError('faltaArroba')) { Falta el @ en el correo. } 
+          @if (form.get('correoele')?.hasError('faltaDominio')) { Falta un dominio válido (ej: .com,
+          .pe). }
         </mat-error>
       </mat-form-field>
       <br />
 
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput formControlName="contra" />
+        <input matInput type="password" formControlName="contra" />
         <mat-error>
           @if (form.get('contra')?.hasError('required')) { Ingrese su contraseña! }
         </mat-error>
@@ -62,8 +68,8 @@
       </mat-radio-group>
       <br />
 
-      <div>
-        <button matButton="elevated">{{ edicion ? 'Editar' : 'Registrar' }}</button>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" type="submit">{{ edicion ? 'Editar' : 'Registrar' }}</button>
       </div>
     </form>
   </div>

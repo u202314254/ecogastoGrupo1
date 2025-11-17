@@ -17,6 +17,7 @@ import { Usuario } from '../../../models/Usuario';
 import { Usuarioservice } from '../../../services/usuarioservice';
 import { Hogar } from '../../../models/Hogar';
 import { Hogarservice } from '../../../services/hogarservice';
+import { customEmailValidator } from '../../validator';
 
 @Component({
   selector: 'app-usuarioinsertar',
@@ -59,9 +60,9 @@ export class Usuarioinsertar implements OnInit {
 
     this.form = this.formBuilder.group({
       codigo: [''],
-      IdHogar: ['', Validators.required],
+      FKHogar: ['', Validators.required],
       nombre: ['', Validators.required],
-      correoele: ['', Validators.required],
+      correoele: ['', [Validators.required, customEmailValidator()]],
       contra: ['', Validators.required],
       estad: [false, Validators.required],
     });
@@ -70,7 +71,7 @@ export class Usuarioinsertar implements OnInit {
   aceptar(): void {
     if (this.form.valid) {
       this.usuario.idUsuario = this.form.value.codigo;
-      this.usuario.hogar.idHogar = this.form.value.IdHogar;
+      this.usuario.hogar.idHogar = this.form.value.FKHogar;
       this.usuario.username = this.form.value.nombre;
       this.usuario.correo = this.form.value.correoele;
       this.usuario.password = this.form.value.contra;
@@ -99,7 +100,7 @@ export class Usuarioinsertar implements OnInit {
       this.uS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idUsuario),
-          IdHogar: new FormControl(data.hogar.idHogar),
+          FKHogar: new FormControl(data.hogar.idHogar),
           nombre: new FormControl(data.username),
           correoele: new FormControl(data.correo),
           contra: new FormControl(data.password),
