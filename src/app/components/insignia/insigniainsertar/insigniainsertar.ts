@@ -39,14 +39,22 @@ export class Insigniainsertar implements OnInit {
   ins: Insignia = new Insignia();
   edicion: boolean = false;
   id: number = 0;
-  metas: Meta[] = [];
+  listaMetas: Meta[] = [];
 
+  logros: { value: string; viewValue: string }[] = [
+  { value: 'guardian-del-enchufe', viewValue: 'Guardián del Enchufe' },
+  { value: 'ninja-del-grifo', viewValue: 'Ninja del Grifo' },
+  { value: 'cazador-de-kilowatts', viewValue: 'Cazador de Kilowatts' },
+  { value: 'equipo-ahorro-activado', viewValue: 'Equipo Ahorro Activado' },
+  { value: 'economizador-elite', viewValue: 'Economizador Élite' },
+  { value: 'hogar-en-modo-leyenda', viewValue: 'Hogar en Modo Leyenda' }
+];
   constructor(
     private iS: Insigniaservice,
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private mS:Metaservice,
+    private mS: Metaservice
   ) {}
 
   ngOnInit(): void {
@@ -57,33 +65,36 @@ export class Insigniainsertar implements OnInit {
     }); 
 
     this.mS.list().subscribe((data) => {
-      this.metas = data;
+      this.listaMetas = data;
     });
-
     this.form = this.formBuilder.group({
       codigo: [''],
-      idMeta: ['', Validators.required],
-      nombre_logro: ['', Validators.required],
-      descripcion: ['', Validators.required],
-      puntos: ['', Validators.required],
+      FKMeta: ['', Validators.required],
+      Nombre_logro: ['', Validators.required],
+      Descripcion: ['', Validators.required],
+      Puntos: ['', [Validators.required, Validators.min(0), Validators.max(10000)]],
     });
   }
 
   aceptar(): void {
     if (this.form.valid) {
       this.ins.idInsignia = this.form.value.codigo;
-      this.ins.meta.idMeta = this.form.value.idMeta;
-      this.ins.nombre_logro = this.form.value.nombre_logro;
-      this.ins.descripcion = this.form.value.descripcion;
-      this.ins.puntos = this.form.value.puntos;
+      this.ins.meta.idMeta = this.form.value.FKMeta;
+      this.ins.nombre_logro = this.form.value.Nombre_logro;
+      this.ins.descripcion = this.form.value.Descripcion;
+      this.ins.puntos = this.form.value.Puntos;
 
       if (this.edicion) {
         this.iS.update(this.ins).subscribe(() => {
-          this.iS.list().subscribe((data) => this.iS.setList(data));
+          this.iS.list().subscribe((data) => {
+            this.iS.setList(data);
+          });
         });
       } else {
-        this.iS.insert(this.ins).subscribe(() => {
-          this.iS.list().subscribe((data) => this.iS.setList(data));
+        this.iS.insert(this.ins).subscribe((data) => {
+          this.iS.list().subscribe((data) => {
+            this.iS.setList(data);
+          });
         });
       }
 
@@ -96,10 +107,10 @@ export class Insigniainsertar implements OnInit {
       this.iS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idInsignia),
-          idMeta: new FormControl(data.meta.idMeta),
-          nombre_logro: new FormControl(data.nombre_logro),
-          descripcion: new FormControl(data.descripcion),
-          puntos: new FormControl(data.puntos),
+          FKMeta: new FormControl(data.meta.idMeta),
+          Nombre_logro: new FormControl(data.nombre_logro),
+          Descripcion: new FormControl(data.descripcion),
+          Puntos: new FormControl(data.puntos),
         });
       });
     }

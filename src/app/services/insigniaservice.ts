@@ -33,7 +33,7 @@ export class Insigniaservice {
       }
     
       update(i: Insignia) {
-        return this.http.put(`${this.url}`, i, { responseType: 'text' });
+        return this.http.put(this.url, i, { responseType: 'text' });
       }
     
       delete(id: number) {

@@ -1,75 +1,82 @@
 <div class="container">
-  <div style="text-align:center; margin:5%">
-    <h2>Registro de Recomendación</h2>
+  <div style="text-align: center; margin: 5%">
+    <h2>{{ edicion ? 'Edición de Recomendación' : 'Registrar Recomendación' }}</h2>
   </div>
-
-  <div style="text-align:center; margin:5%">
-    <form [formGroup]="form" (ngSubmit)="aceptar()">
-
+  <div style="text-align: center; margin: 5%">
+    <form [formGroup]="form" (submit)="aceptar()" class="example-form">
       @if (edicion) {
-      <mat-form-field>
-        <mat-label>ID</mat-label>
-        <input matInput formControlName="codigo" />
-      </mat-form-field>  
+      <mat-form-field class="example-full-width">
+        <mat-label>ID:</mat-label>
+        <input matInput formControlName="codigo" readonly="true" />
+        <mat-error> @if (form.get('id')?.hasError('required')) { Ingrese ID!! } </mat-error>
+      </mat-form-field>
       }
 
       <br />
 
       <mat-form-field>
         <mat-label>Meta</mat-label>
-      <mat-select formControlName="idMeta">
-          @for (m of metas; track m) {
-          <mat-option [value]="m.idMeta">{{ m.idMeta }}</mat-option>
+        <mat-select formControlName="FKMeta">
+          @for (m of listaMetas; track m) {
+          <mat-option [value]="m.idMeta">{{ m.nombre }}</mat-option>
           }
         </mat-select>
         <mat-error>
-          @if (form.get('idMeta')?.hasError('required')) { Ingrese el idMeta! }
+          @if (form.get('FKMeta')?.hasError('required')) { Ingrese la Meta! }
         </mat-error>
       </mat-form-field>
       <br />
 
-      <mat-form-field>
+      <mat-form-field >
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="descripcion" />
+        <textarea matInput formControlName="Descripcion"></textarea>
         <mat-error>
-          @if (form.get('descripcion')?.hasError('required')) { Ingrese la descripción! }
+          @if (form.get('Descripcion')?.hasError('required')) { Ingrese descripción! }
         </mat-error>
       </mat-form-field>
       <br />
 
       <mat-form-field>
-        <mat-label>Categoría</mat-label>
-        <input matInput formControlName="categoria" />
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="Categoria" required>
+          @for (c of categorias; track c) {
+          <mat-option [value]="c.value">{{ c.viewValue }}</mat-option>
+          }
+        </mat-select>
         <mat-error>
-          @if (form.get('categoria')?.hasError('required')) { Ingrese la categoría! }
+          @if (form.get('Categoria')?.hasError('required')) { La categoria es obligatorio. }
         </mat-error>
       </mat-form-field>
       <br />
 
       <mat-form-field>
         <mat-label>Fecha de Publicación</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="fechapublicacion" />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <input matInput [matDatepicker]="picker" formControlName="Fechapublicacion" [min]="today" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+
         <mat-error>
-          @if (form.get('fechapublicacion')?.hasError('required')) { Ingrese la fecha! }
+          @if (form.get('Fechapublicacion')?.hasError('required')) { Ingrese fecha! } @if
+          (form.get('Fechapublicacion')?.hasError('matDatepickerMin')) { La fecha no puede ser
+          antigua! } @if (form.get('Fechapublicacion')?.hasError('menorQueMeta')) { La fecha no
+          puede ser menor que la fecha de inicio de la meta seleccionada! }
         </mat-error>
       </mat-form-field>
       <br />
 
       <mat-form-field>
         <mat-label>Fuente</mat-label>
-        <input matInput formControlName="fuente" />
+        <input matInput formControlName="Fuente" />
         <mat-error>
-          @if (form.get('fuente')?.hasError('required')) { Ingrese la fuente! }
+          @if (form.get('Fuente')?.hasError('required')) { Ingrese la fuente! }
         </mat-error>
       </mat-form-field>
       <br />
 
-      <div style="margin-top:20px;">
-        <button mat-raised-button color="primary" type="submit">Guardar</button>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" type="submit">{{ edicion ? 'Editar' : 'Registrar' }}</button>
       </div>
     </form>
   </div>
 </div>
-   

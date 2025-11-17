@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Recomendacion } from '../models/Recomendacion';
 import { Subject } from 'rxjs';
 const base_url=environment.base
-@Injectable({  
+@Injectable({
     providedIn: 'root',
 })
 export class Recomendacionservice {
@@ -33,7 +33,7 @@ export class Recomendacionservice {
       }
     
       update(r: Recomendacion) {
-        return this.http.put(`${this.url}`, r, { responseType: 'text' });
+        return this.http.put(this.url, r, { responseType: 'text' });
       }
     
       delete(id: number) {
