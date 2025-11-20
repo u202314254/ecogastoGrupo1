@@ -1,5 +1,6 @@
 package pe.edu.upc.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
@@ -7,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuario")
 
 public class Usuario implements Serializable {
     @Id
@@ -18,12 +19,11 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "idHogar", nullable = false)
     private Hogar hogar;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario") // Asumo que en Role se llama 'usuario'
+    @JsonManagedReference // <-- ELIMINA EL BUCLE
     private List<Rol> roles;
 
-    @Column(name = "username", length = 50, nullable = false)
+    @Column(name = "username", length = 50, nullable = false, unique = true)
     private String username;
 
     @Column(name = "correo", length = 50, nullable = false)

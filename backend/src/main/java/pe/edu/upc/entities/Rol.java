@@ -3,9 +3,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-
 @Entity
-@Table(name = "Rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"id_Usuario", "tipo"})})
+@Table(name = "rol", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "tipo"})})
 public class Rol implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +18,8 @@ public class Rol implements Serializable {
     @JsonBackReference
     private Usuario usuario;
 
+    public Rol() {
+    }
 
     public int getIdRol() {
         return idRol;
@@ -44,3 +45,4 @@ public class Rol implements Serializable {
         this.usuario = usuario;
     }
 }
+

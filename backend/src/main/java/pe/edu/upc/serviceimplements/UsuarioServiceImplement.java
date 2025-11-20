@@ -39,7 +39,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
     }
 
     @Override
-        public List<String[]> listarUsuariosActivos() {
+    public List<String[]> listarUsuariosActivos() {
         return uS.listarUsuariosActivos();
     }
 
