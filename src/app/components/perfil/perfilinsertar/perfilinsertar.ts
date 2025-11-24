@@ -69,9 +69,9 @@ export class Perfilinsertar implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       FKUsuario: ['', Validators.required],
-      name: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(50)]],
       Edad: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
-      Genero: ['', Validators.required],
+      Genero: ['', [Validators.required, Validators.maxLength(50)]],
       Telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]+$')]],
     });
     
