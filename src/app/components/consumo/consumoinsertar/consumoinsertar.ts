@@ -114,8 +114,8 @@ export class Consumoinsertar implements OnInit {
       this.cS.listId(this.id).subscribe((data) => {
         this.form = new FormGroup({
           codigo: new FormControl(data.idConsumo),
-          idUsuario: new FormControl(data.usuario.idUsuario),
-          idRecurso: new FormControl(data.recurso.idRecurso), 
+          FKUsuario: new FormControl(data.usuario.idUsuario),
+          FKRecurso: new FormControl(data.recurso.idRecurso), 
           Descripcion: new FormControl(data.descripcion),
           Cantidad: new FormControl(data.cantidad),
           Fecha: new FormControl(data.fecha),
