@@ -20,12 +20,15 @@
           }
         </mat-select>
         <mat-error> @if (form.get('FKUsuario')?.hasError('required')) { Ingrese su usuario! } </mat-error>
+        
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Nombre Completo</mat-label>
         <input matInput formControlName="name" />
-        <mat-error> @if (form.get('name')?.hasError('required')) { Ingrese su nombre completo! } </mat-error>
+        <mat-error> @if (form.get('name')?.hasError('required')) { Ingrese su nombre completo! } 
+          @if (form.get('name')?.hasError('maxlength')) { El número máximo de caracteres es de 50! }
+        </mat-error>
       </mat-form-field>
       <br />
 
@@ -52,6 +55,7 @@
         </mat-select>
         <mat-error>
           @if (form.get('Genero')?.hasError('required')) { El Género es obligatorio. }
+          @if (form.get('Genero')?.hasError('maxlength')) { El número máximo de caracteres es de 50! }
         </mat-error>
       </mat-form-field>
       <br />

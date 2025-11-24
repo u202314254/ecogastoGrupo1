@@ -57,8 +57,8 @@ export class Notificacioninsertar implements OnInit {
     this.form = this.formBuilder.group({
       codigo: [''],
       FKUsuario: ['', Validators.required],
-      Titulo: ['', Validators.required],
-      Descripcion: ['', Validators.required],
+      Titulo: ['', [Validators.required, Validators.maxLength(50)]],
+      Descripcion: ['', [Validators.required, Validators.maxLength(300)]],
       Fecha: ['', Validators.required],
       Leido: [false, Validators.required],
     });
