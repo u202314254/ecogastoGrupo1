@@ -8,27 +8,32 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { Perfil } from '../../../models/Perfil';
 import { Perfilservice } from '../../../services/perfilservice';
 import { Usuarioservice } from '../../../services/usuarioservice';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { Usuario } from '../../../models/Usuario';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-perfilinsertar',
   imports: [
-    ReactiveFormsModule,
+    MatSelectModule,
     MatInputModule,
+    MatRadioModule,
     MatDatepickerModule,
     MatButtonModule,
-    MatRadioModule,
-    MatSelectModule 
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatIconModule,
   ],
   templateUrl: './perfilinsertar.html',
-  styleUrl: './perfilinsertar.css',
+  styleUrl: './perfilinsertar.css'
 })
 export class Perfilinsertar implements OnInit {
   form: FormGroup = new FormGroup({});
@@ -36,11 +41,11 @@ export class Perfilinsertar implements OnInit {
   edicion: boolean = false;
   id: number = 0;
   listaUsuarios: Usuario[] = [];
+  today: Date=new Date();
 
   generos: { value: string; viewValue: string }[] = [
     { value: 'Maculino', viewValue: 'Masculino' },
     { value: 'Femenino', viewValue: 'Femenino' },
-    { value: 'Ivan Villanueva 🏳️‍🌈', viewValue: 'Ivan Villanueva 🏳️‍🌈' },
   ];
   constructor(
     private pS: Perfilservice,
@@ -56,6 +61,7 @@ export class Perfilinsertar implements OnInit {
       this.edicion = data['id'] != null;
       this.init();
     });
+
     this.uS.list().subscribe((data) => {
       this.listaUsuarios = data;
     });
@@ -64,9 +70,9 @@ export class Perfilinsertar implements OnInit {
       codigo: [''],
       FKUsuario: ['', Validators.required],
       name: ['', Validators.required],
-      Edad: ['', Validators.required],
+      Edad: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
       Genero: ['', Validators.required],
-      Telefono: ['', Validators.required],
+      Telefono: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('^[0-9]+$')]],
     });
     
   }

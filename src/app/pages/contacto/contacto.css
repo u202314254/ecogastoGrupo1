@@ -1,0 +1,139 @@
+
+.navbar {
+  width: 100%;
+  background: #141E18;
+  border-bottom: 0.5px solid #ffffff;
+  
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: flex-start; /* antes SPACE-BETWEEN */
+  align-items: center;
+  gap: 150px; /* separa Ecogasto del resto */
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.links {
+  display: flex;
+  gap: 48px;
+  font-size: 15px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.2s ease;
+}
+
+.links a:hover,
+.active {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 14px;
+}
+
+.btn-outline {
+  border: 1px solid white;
+  padding: 10px 26px;
+  border-radius: 999px;
+  border-width: 2.5px;
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-filled {
+  background: #9FE870;
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  text-decoration: none;
+  color: #141E18;
+  font-weight: 550;
+  align-content: center;
+}
+
+.contact-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+  background: #141E18;
+  min-height: calc(100vh - 80px);
+  color: #fff;
+}
+
+.left {
+  width: 45%;
+  margin-left: 120px;
+}
+
+.left h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.left p {
+  color: #dcdcdc;
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+
+.contact-form {
+  background: #0a1620;
+  padding: 50px;
+  border-radius: 14px;
+  width: 90%;
+}
+
+.contact-form label {
+  font-size: 12px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: #0d1c2b;
+  padding: 12px;
+  border-radius: 8px;
+  color: #fff;
+  margin-bottom: 18px;
+  border: none;
+}
+
+.row-2 {
+  display: flex;
+  gap: 12px;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 12px;
+  background: #9afc5c;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.right img {
+  width: 500px;
+  margin-right: 180px;
+}
