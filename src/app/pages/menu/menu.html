@@ -1,38 +1,40 @@
 <!-- NAVBAR FIJO ARRIBA -->
 <header class="menu-header">
   <div class="menu-container">
-    <button
-      matButton
-      class="btn-rojo"
-      aria-label="Example icon-button with menu icon"
-      [matMenuTriggerFor]="menuReporte"
-    >
-      <mat-icon>file</mat-icon>Reportes
-    </button>
 
     <!-- USUARIOS -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/usuarios"><mat-icon>person</mat-icon> Usuarios</button>
+      <button mat-button routerLink="/usuarios">
+        <mat-icon>person</mat-icon> Usuarios
+      </button>
     </mat-toolbar>
 
     <!-- HOGARES -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/hogares"><mat-icon>home</mat-icon> Hogares</button>
+      <button mat-button routerLink="/hogares">
+        <mat-icon>home</mat-icon> Hogares
+      </button>
     </mat-toolbar>
 
     <!-- CONSUMOS -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/consumos"><mat-icon>shopping_cart</mat-icon> Consumos</button>
+      <button mat-button routerLink="/consumos">
+        <mat-icon>shopping_cart</mat-icon> Consumos
+      </button>
     </mat-toolbar>
 
     <!-- RECURSOS -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/recursos"><mat-icon>eco</mat-icon> Recursos</button>
+      <button mat-button routerLink="/recursos">
+        <mat-icon>eco</mat-icon> Recursos
+      </button>
     </mat-toolbar>
 
     <!-- METAS -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/metas"><mat-icon>flag</mat-icon> Metas</button>
+      <button mat-button routerLink="/metas">
+        <mat-icon>flag</mat-icon> Metas
+      </button>
     </mat-toolbar>
 
     <!-- NOTIFICACIONES -->
@@ -44,7 +46,9 @@
 
     <!-- ROLES -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/roles"><mat-icon>supervisor_account</mat-icon> Roles</button>
+      <button mat-button routerLink="/roles">
+        <mat-icon>supervisor_account</mat-icon> Roles
+      </button>
     </mat-toolbar>
 
     <!-- INSIGNIAS -->
@@ -63,7 +67,9 @@
 
     <!-- PERFILES -->
     <mat-toolbar class="menu-item">
-      <button mat-button routerLink="/perfiles"><mat-icon>badge</mat-icon> Perfiles</button>
+      <button mat-button routerLink="/perfiles">
+        <mat-icon>badge</mat-icon> Perfiles
+      </button>
     </mat-toolbar>
 
     <!-- RECOMENDACIONES -->
@@ -73,10 +79,7 @@
       </button>
     </mat-toolbar>
 
-    <mat-menu #menuReporte="matMenu">
-      <button mat-menu-item routerLink="/buscar"><mat-icon>list</mat-icon>R.Cantidad</button>
-      <button mat-menu-item routerLink="/reporte-usuarios"><mat-icon>list</mat-icon>Notificaciones Por Usuarios</button>
-    </mat-menu>
-
   </div>
 </header>
+
+
