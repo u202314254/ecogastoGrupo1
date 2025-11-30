@@ -2,7 +2,12 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { Seguridad } from '../models/Seguridad';
+<<<<<<< HEAD
 import { Subject } from 'rxjs';
+=======
+import { Observable, Subject } from 'rxjs';
+import { AccesosSeguridadDTO } from '../models/AccesosSeguridadDTO';
+>>>>>>> feature/mauricio
 const base_url=environment.base
 @Injectable({
     providedIn: 'root',
@@ -39,4 +44,10 @@ export class Seguridadservice {
       delete(id: number) {
         return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
       }
+<<<<<<< HEAD
+=======
+      accesosSospechosos(): Observable<AccesosSeguridadDTO[]>{
+        return this.http.get<AccesosSeguridadDTO[]>(`${this.url}/accesos`)
+      }
+>>>>>>> feature/mauricio
 }

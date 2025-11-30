@@ -6,10 +6,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+<<<<<<< HEAD
 
 @Component({
     selector: 'app-seguridadlistar',
     imports: [MatTableModule,RouterLink, MatIconModule, MatCardModule, MatPaginatorModule],
+=======
+import { AccesosSospechosos } from '../../accesos-sospechosos/accesos-sospechosos';
+
+@Component({
+    selector: 'app-seguridadlistar',
+    imports: [MatTableModule,RouterLink, MatIconModule, MatCardModule, MatPaginatorModule, AccesosSospechosos],
+>>>>>>> feature/mauricio
     templateUrl: './seguridadlistar.html',
     styleUrl: './seguridadlistar.css',
 })

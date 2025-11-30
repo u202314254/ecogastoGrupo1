@@ -38,10 +38,17 @@
       <br />
 
       <mat-form-field>
+<<<<<<< HEAD
         <mat-label>ID Dispositivo</mat-label>
         <input matInput formControlName="ip" />
         <mat-error> @if (form.get('ip')?.hasError('required')) { Ingrese el id! } 
           @else if (form.get('ip')?.hasError('maxlength')) { El número máximo de caracteres es de 50! }
+=======
+        <mat-label>IP Dispositivo</mat-label>
+        <input matInput formControlName="ip" />
+        <mat-error> @if (form.get('ip')?.hasError('required')) { Ingrese el id! } 
+          @if (form.get('ip')?.hasError('pattern')) { Ingrese formato correcto ej.192.10.1.108! } 
+>>>>>>> feature/mauricio
         </mat-error>
       </mat-form-field>
       <br />

@@ -1,0 +1,15 @@
+:host {
+  display: block;       /* Para que ocupe espacio como un div */
+  width: 100%;          /* Asegura que tome todo el ancho del padre */
+}
+
+/* Ahora sí, el contenedor interno que centra el canvas */
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+h2{
+    text-align: center;
+}

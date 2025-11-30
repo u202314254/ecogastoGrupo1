@@ -23,7 +23,11 @@ import { Seguridadservice } from '../../../services/seguridadservice';
     MatDatepickerModule,
     MatButtonModule,
     MatRadioModule,
+<<<<<<< HEAD
     MatSelectModule   ],
+=======
+    MatSelectModule],
+>>>>>>> feature/mauricio
     templateUrl: './seguridadinsertar.html',
     providers: [provideNativeDateAdapter()],
     styleUrl: './seguridadinsertar.css',
@@ -41,7 +45,10 @@ export class Seguridadinsertar implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+<<<<<<< HEAD
     private fb: FormBuilder,
+=======
+>>>>>>> feature/mauricio
     private uS: Usuarioservice,
     ) {}
 
@@ -59,7 +66,11 @@ export class Seguridadinsertar implements OnInit {
         codigo: [''],
         FKUsuario: ['', Validators.required],
         ultimoLo: ['', Validators.required],
+<<<<<<< HEAD
         ip: ['', [Validators.required, Validators.maxLength(50)]],
+=======
+        ip: ['', [Validators.required, Validators.pattern(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/)]],
+>>>>>>> feature/mauricio
         intentos: ['', [Validators.required, Validators.min(0), Validators.max(10)]],
     });
     }
