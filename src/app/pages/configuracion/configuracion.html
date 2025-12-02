@@ -1,0 +1,141 @@
+<div class="config-wrapper">
+  <mat-card class="config-card">
+    <div class="card-header">
+      <div>
+        <h2>Configuración de Usuario</h2>
+        <span class="subtitle">Datos personales y de tu hogar</span>
+      </div>
+
+      <button class="edit-btn" (click)="toggleEdit()">
+        <mat-icon>{{ editMode ? 'close' : 'edit' }}</mat-icon>
+      </button>
+    </div>
+
+    <mat-card-content>
+      <!-- MODO SOLO LECTURA -->
+      <ng-container *ngIf="!editMode">
+        <div class="section-title">Cuenta</div>
+
+        <div class="row">
+          <span class="label">Usuario</span>
+          <span class="value">{{ usuario?.username }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Correo</span>
+          <span class="value">{{ usuario?.correo }}</span>
+        </div>
+
+        <!-- PERFIL -->
+        <div class="section-title">Perfil</div>
+
+        <div class="row">
+          <span class="label">Nombre</span>
+          <span class="value">{{ usuario?.perfil?.nombre }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Edad</span>
+          <span class="value">{{ usuario?.perfil?.edad }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Género</span>
+          <span class="value">{{ usuario?.perfil?.genero }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Teléfono</span>
+          <span class="value">{{ usuario?.perfil?.telefono }}</span>
+        </div>
+
+        <!-- HOGAR -->
+        <div class="section-title">Hogar</div>
+
+        <div class="row">
+          <span class="label">Tipo hogar</span>
+          <span class="value">{{ usuario?.hogar?.tipohogar }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Distrito</span>
+          <span class="value">{{ usuario?.hogar?.distrito }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Ubicación</span>
+          <span class="value">{{ usuario?.hogar?.ubicacion }}</span>
+        </div>
+
+        <div class="row">
+          <span class="label">Personas en casa</span>
+          <span class="value">{{ usuario?.hogar?.numpersonas }}</span>
+        </div>
+      </ng-container>
+
+      <!-- MODO EDICIÓN -->
+      <ng-container *ngIf="editMode">
+        <form [formGroup]="form" (ngSubmit)="guardarCambios()">
+          <div class="section-title">Cuenta</div>
+          <div class="row">
+            <span class="label">Usuario</span>
+            <input type="text" formControlName="username" />
+          </div>
+
+          <div class="row">
+            <span class="label">Correo</span>
+            <input type="email" formControlName="correo" />
+          </div>
+
+          <div class="section-title">Perfil</div>
+          <div class="row">
+            <span class="label">Nombre</span>
+            <input type="text" formControlName="nombre" />
+          </div>
+
+          <div class="row">
+            <span class="label">Edad</span>
+            <input type="number" formControlName="edad" />
+          </div>
+
+          <div class="row">
+            <span class="label">Género</span>
+            <input type="text" formControlName="genero" />
+          </div>
+
+          <div class="row">
+            <span class="label">Teléfono</span>
+            <input type="text" formControlName="telefono" />
+          </div>
+
+          <div class="section-title">Hogar</div>
+
+          <div class="row">
+            <span class="label">Tipo hogar</span>
+            <input type="text" formControlName="tipohogar" />
+          </div>
+
+          <div class="row">
+            <span class="label">Distrito</span>
+            <input type="text" formControlName="distrito" />
+          </div>
+
+          <div class="row">
+            <span class="label">Ubicación</span>
+            <textarea formControlName="ubicacion"></textarea>
+          </div>
+
+          <div class="row">
+            <span class="label">Personas en casa</span>
+            <input type="number" formControlName="numpersonas" />
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn-cancel" (click)="cancelar()">Cancelar</button>
+            <button type="submit" class="btn-save">Guardar Cambios</button>
+          </div>
+        </form>
+      </ng-container>
+    </mat-card-content>
+  </mat-card>
+</div>

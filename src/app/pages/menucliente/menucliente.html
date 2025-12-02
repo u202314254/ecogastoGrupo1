@@ -1,0 +1,146 @@
+<div class="dashboard-container">
+  <aside class="sidebar" [class.collapsed]="isCollapsed">
+    <div class="sidebar-header">
+      <div class="logo-area">
+        <img src="leaf blanco.png" alt="Logo" class="logo-img" style="filter: invert(1) brightness(0.5)" />
+
+        @if (!isCollapsed) {
+        <span class="logo-text">EcoGasto</span>
+        }
+      </div>
+
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        <mat-icon>{{ isCollapsed ? 'chevron_right' : 'menu_open' }}</mat-icon>
+      </button>
+    </div>
+
+    @if (!isCollapsed) {
+    <div class="search-box">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input type="text" placeholder="Buscar..." />
+    </div>
+    }
+
+    <nav class="nav-links">
+      <button routerLink="/dashboard" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">grid_view</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Dashboard</span>
+        }
+      </button>
+
+      @if (usuario?.role?.toLowerCase() === 'admin' || usuario?.role?.toLowerCase() === 'client') {
+      <button routerLink="/miconsumo" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">person_outline</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Mi consumo</span>
+        }
+      </button>
+      }
+
+      @if (usuario?.role?.toLowerCase() === 'admin' || usuario?.role?.toLowerCase() === 'client') {
+      <button routerLink="/mismetas" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">calendar_today</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Metas</span>
+        }
+      </button>
+      }
+
+      @if (usuario?.role?.toLowerCase() === 'admin' || usuario?.role?.toLowerCase() === 'client')
+      {
+      <button routerLink="metasincompletas" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">block</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Metas incompletas</span>
+        }
+      </button>
+      }
+
+      @if (usuario?.role?.toLowerCase() === 'admin' || usuario?.role?.toLowerCase() === 'client') {
+      <button routerLink="/misrecomendaciones" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">lightbulb_outline</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Recomendaciones</span>
+        }
+      </button>
+      }
+
+      @if (usuario?.role?.toLowerCase() === 'admin') {
+      <button routerLink="/misseguridades" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">security</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Seguridades</span>
+        }
+      </button>
+      }
+
+      <button routerLink="/misinsignias" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">verified_user</mat-icon>
+
+        @if (!isCollapsed) {
+        <span class="text">Insignias</span>
+        }
+      </button>
+
+      <button routerLink="/recomendaciones" routerLinkActive="active" class="nav-item" style="border: none">
+        <mat-icon class="nav-icon">verified_user</mat-icon>
+
+        <span class="text">CRUD</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="avatar">
+          {{ usuario?.username?.charAt(0) | uppercase }}
+        </div>
+
+        @if (!isCollapsed) {
+        <div class="user-info">
+          <span class="name">{{ usuario?.username }}</span>
+
+          <span class="role-pill">User</span>
+        </div>
+        } @if (!isCollapsed) {
+        <div class="notif-area">
+          <mat-icon routerLink="misnotificaciones" name="notif-icon">notifications_none</mat-icon>
+          <span class="notif-dot"></span>
+          <mat-icon routerLink="/notificacionnoleida" name="notif-icon">
+            mark_email_unread
+          </mat-icon>
+        </div>
+        }
+      </div>
+
+      <div class="footer-links">
+        <button routerLink="configuracion" class="nav-item" style="margin-top: 5px; padding-right: 36%; border: none">
+          <mat-icon class="nav-icon">settings</mat-icon>
+
+          @if (!isCollapsed) {
+          <span class="text">Configuración</span>
+          }
+        </button>
+
+        <p style="color: rgb(3, 104, 28)">ROL: {{ usuario?.role }}</p>
+
+        <a class="nav-item logout" (click)="cerrarSesion()">
+          <mat-icon class="nav-icon">logout</mat-icon>
+
+          @if (!isCollapsed) {
+          <span class="text">Cerrar Sesión</span>
+          }
+        </a>
+      </div>
+    </div>
+  </aside>
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

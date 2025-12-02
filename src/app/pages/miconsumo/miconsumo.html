@@ -1,0 +1,84 @@
+<div class="consumo-container">
+  <div class="page-header">
+    <h1>Mi Consumo</h1>
+  </div>
+
+  <div class="dashboard-grid">
+    <!-- IZQUIERDA -->
+    <div class="charts-column">
+      <!-- 1. BARRAS -->
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Consumo por recurso</h3>
+
+          <div class="select-wrapper">
+            <select [(ngModel)]="mesSeleccionado" (change)="onMesChange()" class="date-select">
+              <option *ngFor="let m of meses" [value]="m.id">
+                {{ m.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chart-wrapper chart-large">
+          <canvas baseChart #barChart [type]="barType" [data]="{ labels: barLabels, datasets: barData }"
+            [options]="barOptions"></canvas>
+        </div>
+      </div>
+
+      <!-- 2. ÁREA -->
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Historial Anual</h3>
+
+          <div class="year-select">
+            <select [(ngModel)]="anioSeleccionado" (change)="onAnioChange()" class="date-select">
+              <option *ngFor="let a of anios" [value]="a">
+                {{ a }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="chart-wrapper chart-medium">
+          <canvas baseChart #areaChart [type]="areaType" [data]="{ labels: areaLabels, datasets: areaData }"
+            [options]="areaOptions"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- DERECHA KPIs -->
+    <div class="stats-column">
+      <div class="card stat-card">
+        <h2 class="big-number">S/ {{ totalMes.toFixed(2) }}</h2>
+        <p>Consumo total del mes</p>
+      </div>
+
+      <div class="card stat-card">
+        <h2 class="big-number">S/ {{ promedioRecurso.toFixed(2) }}</h2>
+        <p>Promedio por recurso</p>
+      </div>
+
+      <div class="card stat-card">
+        <h2 class="big-number" [class.positive]="!variacion.includes('-')">
+          {{ variacion }}
+        </h2>
+        <p>Comparado al mes pasado</p>
+      </div>
+
+      <!-- TIP -->
+      <div class="card tip-card">
+        <p class="tip-text">Reduciendo 10 min de ducha, ahorras 15% de agua.</p>
+      </div>
+
+      <!-- BOTONES -->
+      <div class="acciones-container debajo-tip">
+        <button (click)="goRegistrar()" class="btn-accion registrar">Registrar</button>
+
+        <button (click)="goActualizar()" class="btn-accion actualizar">Actualizar</button>
+
+        <button (click)="goListar()" class="btn-accion listar">Listar Consumos</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="metas-container">
+
+  <div class="header">
+    <h1>Mis Metas</h1>
+
+    <button mat-raised-button color="primary" (click)="toggleFormulario()">
+      {{ mostrarFormulario ? 'Cerrar' : 'Agregar Meta' }}
+    </button>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div *ngIf="mostrarFormulario" class="form-card">
+
+    <form [formGroup]="form" (ngSubmit)="guardarMeta()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre de la meta</mat-label>
+        <input matInput formControlName="Nombre">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Recurso</mat-label>
+        <mat-select formControlName="FKRecurso">
+          @for(r of listaRecursos; track r){
+            <mat-option [value]="r.idRecurso">{{ r.nombreRecurso }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="Fechainicio">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha fin</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="Fechafin">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Progreso (%)</mat-label>
+        <input matInput type="number" formControlName="Progreso">
+      </mat-form-field>
+
+      <button mat-raised-button color="accent" type="submit">
+        {{ editando ? 'Actualizar Meta' : 'Guardar Meta' }}
+      </button>
+
+    </form>
+
+  </div>
+
+  <!-- LISTA DE METAS -->
+  <div class="cards-wrapper">
+
+    @for(meta of metas; track meta.idMeta) {
+      <mat-card class="meta-card">
+
+        <mat-card-header>
+          <mat-card-title>{{ meta.nombre }}</mat-card-title>
+
+          <div class="actions">
+            <button mat-icon-button color="primary" (click)="editarMeta(meta)">
+              <mat-icon>edit</mat-icon>
+            </button>
+
+            <button mat-icon-button color="warn" (click)="eliminarMeta(meta.idMeta)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p><strong>Recurso:</strong> {{ meta.recurso?.nombreRecurso }}</p>
+          <p><strong>Progreso:</strong> {{ meta.progreso }}%</p>
+          <p><strong>Inicio:</strong> {{ meta.fechainicio | date }}</p>
+          <p><strong>Fin:</strong> {{ meta.fechafin | date }}</p>
+          <p><strong>Estado:</strong> {{ meta.estado ? 'Activa' : 'Inactiva' }}</p>
+        </mat-card-content>
+
+      </mat-card>
+    }
+
+  </div>
+
+</div>

@@ -1,0 +1,237 @@
+:root {
+  --card-bg: #ffffff;
+  --text-dark: #141E18;
+  --muted: #888;
+  --accent: #8cff66;
+  --shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+/* ============================= */
+/* PANEL GENERAL (verde lo dejamos por ahora) */
+/* ============================= */
+
+.consumo-container {
+  padding: 40px;
+  margin-left: 40px;
+  width: calc(100% - 40px);
+  min-height: calc(100vh - 40px);
+
+  background: #ffffff; /* <--- lo dejamos así */
+  border-radius: 24px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.12);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título */
+.page-header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-left: 10px;
+  margin-bottom: 28px;
+  color: var(--text-dark);
+}
+
+/* ============================= */
+/* GRID */
+/* ============================= */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 24px;
+  width: 100%;
+}
+.charts-column,
+.stats-column {
+  padding: 10px;
+}
+
+/* ============================= */
+/* TARJETAS TIPO FIGMA */
+/* ============================= */
+
+.card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 16px 18px;   /* was 26px — ahora más delgado */
+  border: 1px solid #e9e9e9;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  margin-bottom: 18px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* ============================= */
+/* SELECTS */
+/* ============================= */
+
+.select-wrapper select,
+.year-select select {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+/* ============================= */
+/* GRÁFICOS TIPO FIGMA */
+/* ============================= */
+
+/* Tarjeta del gráfico */
+.chart-card {
+  border-radius: 26px !important;
+  padding: 22px !important;
+}
+
+.chart-wrapper canvas {
+  border: 1px solid #e7e7e7;
+  border-radius: 16px;
+  padding: 10px;
+  background: #fff;
+}
+
+/* ALTURA COMO EN FIGMA */
+.chart-large {
+  min-height: 290px !important;
+  max-height: 300px !important;
+}
+
+.chart-medium {
+  min-height: 240px !important;
+  max-height: 260px !important;
+}
+
+/* ============================= */
+/* ESTILO BARRAS DELGADAS */
+/* ============================= */
+
+/* Para gráficos de barras Chart.js */
+:root {
+  --bar-width: 45px; /* ajustable */
+}
+
+canvas {
+  --bar-thickness: 35; /* barra delgada estilo figma */
+}
+
+/* ============================= */
+/* KPIS */
+/* ============================= */
+
+.stats-column {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.stat-card {
+  background: #fff;
+  border-radius: 22px;
+  padding: 26px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  border: 1px solid #efefef;
+}
+
+.big-number {
+  font-size: 40px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+  color: #000;
+}
+
+.big-number.positive {
+  color: #22c55e;
+}
+
+.stat-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ============================= */
+/* TIP CARD */
+/* ============================= */
+
+.tip-card {
+  border-radius: 22px;
+  padding: 26px;
+  background: #fff;
+  border: 1px solid #efefef;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.tip-text {
+  color: #3c3c3c;
+  font-size: 15px;
+}
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 1000px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================= */
+/* BOTONES DE ACCIÓN */
+/* ============================= */
+
+.acciones-container {
+  display: flex;
+  gap: 16px;
+  margin: 10px 0 30px 10px;
+}
+
+.btn-accion {
+  padding: 20px 28px;
+  border-radius: 10px;
+  border: none;
+  font-size: 23px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .25s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+/* Registrar */
+.btn-accion.registrar {
+  background: #4CAF50;
+  color: white;
+}
+.btn-accion.registrar:hover {
+  background: #43a047;
+  transform: translateY(-2px);
+}
+
+/* Actualizar */
+.btn-accion.actualizar {
+  background: #8BC34A;
+  color: white;
+}
+.btn-accion.actualizar:hover {
+  background: #7cb342;
+  transform: translateY(-2px);
+}
